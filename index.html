@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
+
+<meta name="theme-color" content="#05050b">
+
+<title>DEXIMAL GAMEHUB</title>
+
+<style>
+
+/* =====================================================
+   DEXIMAL GAMEHUB
+   COMPLETE SINGLE INDEX.HTML
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: white;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #11142c,
+            #05050b 70%
+        );
+
+    overflow-x: hidden;
+}
+
+
+/* =====================================================
+   INTRO SCREEN
+===================================================== */
+
+#introScreen {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+
+    z-index: 999999;
+
+    background: #000;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    transition:
+        opacity 1.2s ease,
+        visibility 1.2s ease;
+}
+
+
+#introVideo {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    background: #000;
+}
+
+
+/* Dark cinematic layer */
+
+.intro-dark {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 2;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0,0,0,.05),
+            rgba(0,0,0,.80)
+        );
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   DEXIMAL LOGO
+===================================================== */
+
+#deximalLogo {
+
+    position: relative;
+
+    z-index: 5;
+
+    width: 90%;
+
+    text-align: center;
+
+    opacity: 0;
+
+    transform:
+        scale(.65)
+        translateY(25px);
+
+    transition:
+        opacity 1.4s ease,
+        transform 1.4s cubic-bezier(.2,.8,.2,1);
+}
+
+
+#deximalLogo.show {
+
+    opacity: 1;
+
+    transform:
+        scale(1)
+        translateY(0);
+}
+
+
+.logo-crown {
+
+    font-size: 45px;
+
+    margin-bottom: 8px;
+
+    filter:
+        drop-shadow(0 0 8px #ffd700)
+        drop-shadow(0 0 25px #ff9900);
+
+    animation:
+        crownFloat 2s ease-in-out infinite;
+}
+
+
+@keyframes crownFloat {
+
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+
+.logo-main {
+
+    font-size:
+        clamp(42px, 14vw, 100px);
+
+    font-weight: 900;
+
+    letter-spacing:
+        clamp(5px, 2vw, 15px);
+
+    line-height: 1;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #ffb300,
+            #fff,
+            #00eaff,
+            #a855f7,
+            #ff1493,
+            #ffb300
+        );
+
+    background-size: 400%;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    animation:
+        logoColors 5s linear infinite;
+
+    filter:
+        drop-shadow(0 0 10px rgba(0,220,255,.5));
+}
+
+
+@keyframes logoColors {
+
+    0% {
+        background-position: 0%;
+    }
+
+    100% {
+        background-position: 400%;
+    }
+}
+
+
+.logo-gamehub {
+
+    margin-top: 8px;
+
+    font-size:
+        clamp(22px, 7vw, 48px);
+
+    letter-spacing:
+        clamp(5px, 2vw, 12px);
+
+    font-weight: 800;
+
+    text-shadow:
+
+        0 0 5px #fff,
+        0 0 15px #00eaff,
+        0 0 35px #7b2cff;
+}
+
+
+.logo-line {
+
+    width: min(350px, 75%);
+
+    height: 2px;
+
+    margin: 18px auto;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            #ffd700,
+            #00eaff,
+            #ff00cc,
+            transparent
+        );
+
+    box-shadow:
+        0 0 15px #00eaff,
+        0 0 30px #7b2cff;
+}
+
+
+.logo-tagline {
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+    opacity: .8;
+
+    text-transform: uppercase;
+}
+
+
+/* =====================================================
+   INTRO HIDDEN
+===================================================== */
+
+#introScreen.hide {
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   MAIN HUB
+===================================================== */
+
+#gameHub {
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    position: relative;
+
+    padding:
+        25px
+        15px
+        40px;
+
+    opacity: 0;
+
+    transform: translateY(20px);
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+}
+
+
+#gameHub.visible {
+
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* =====================================================
+   BACKGROUND EFFECTS
+===================================================== */
+
+.bg-glow {
+
+    position: fixed;
+
+    width: 350px;
+    height: 350px;
+
+    border-radius: 50%;
+
+    filter: blur(100px);
+
+    opacity: .15;
+
+    pointer-events: none;
+
+    z-index: -1;
+}
+
+
+.glow-blue {
+
+    background: #008cff;
+
+    top: -100px;
+    left: -100px;
+}
+
+
+.glow-purple {
+
+    background: #b000ff;
+
+    right: -120px;
+    top: 35%;
+}
+
+
+.glow-gold {
+
+    background: #ff9d00;
+
+    left: -100px;
+    bottom: -100px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.hub-header {
+
+    max-width: 1000px;
+
+    margin:
+        0 auto
+        25px;
+
+    text-align: center;
+}
+
+
+.small-crown {
+
+    font-size: 30px;
+
+    filter:
+        drop-shadow(0 0 8px #ffd700);
+}
+
+
+.hub-title {
+
+    margin-top: 5px;
+
+    font-size:
+        clamp(34px, 10vw, 70px);
+
+    font-weight: 900;
+
+    letter-spacing: 5px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #ffd700,
+            #fff,
+            #00eaff,
+            #ffd700
+        );
+
+    background-size: 300%;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    animation:
+        logoColors 5s linear infinite;
+}
+
+
+.hub-subtitle {
+
+    margin-top: 8px;
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+    opacity: .7;
+}
+
+
+/* =====================================================
+   SOUND BUTTON
+===================================================== */
+
+#soundButton {
+
+    position: fixed;
+
+    right: 15px;
+    top: 15px;
+
+    z-index: 10000;
+
+    width: 50px;
+    height: 50px;
+
+    border: 1px solid
+        rgba(255,255,255,.25);
+
+    border-radius: 50%;
+
+    background:
+        rgba(5,5,15,.75);
+
+    color: white;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 0 15px
+        rgba(0,220,255,.25);
+
+    transition: .2s;
+}
+
+
+#soundButton:active {
+
+    transform: scale(.88);
+}
+
+
+/* =====================================================
+   GAME GRID
+===================================================== */
+
+.games-grid {
+
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 14px;
+}
+
+
+/* =====================================================
+   GAME CARD
+===================================================== */
+
+.game-card {
+
+    position: relative;
+
+    min-height: 210px;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.10),
+            rgba(255,255,255,.025)
+        );
+
+    backdrop-filter:
+        blur(15px);
+
+    -webkit-backdrop-filter:
+        blur(15px);
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.4);
+
+    cursor: pointer;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+
+.game-card:active {
+
+    transform:
+        scale(.95);
+}
+
+
+.game-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.12),
+            transparent 50%
+        );
+
+    pointer-events: none;
+}
+
+
+.game-icon {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 80px;
+    height: 80px;
+
+    margin:
+        22px auto
+        12px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 20px;
+
+    font-size: 45px;
+
+    background:
+        rgba(0,0,0,.35);
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+
+    box-shadow:
+        inset 0 0 20px
+        rgba(255,255,255,.05);
+}
+
+
+.game-name {
+
+    position: relative;
+
+    z-index: 2;
+
+    text-align: center;
+
+    font-size: 19px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+}
+
+
+.game-description {
+
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 7px;
+
+    text-align: center;
+
+    padding: 0 8px;
+
+    font-size: 10px;
+
+    opacity: .65;
+}
+
+
+/* =====================================================
+   CARD COLORS
+===================================================== */
+
+.ludo {
+
+    box-shadow:
+        0 0 25px
+        rgba(255,174,0,.12);
+}
+
+
+.ludo .game-icon {
+
+    box-shadow:
+        0 0 25px
+        rgba(255,174,0,.25);
+}
+
+
+.checkers {
+
+    box-shadow:
+        0 0 25px
+        rgba(255,193,7,.12);
+}
+
+
+.checkers .game-icon {
+
+    box-shadow:
+        0 0 25px
+        rgba(255,193,7,.25);
+}
+
+
+.mahjong {
+
+    box-shadow:
+        0 0 25px
+        rgba(0,255,150,.12);
+}
+
+
+.mahjong .game-icon {
+
+    box-shadow:
+        0 0 25px
+        rgba(0,255,150,.25);
+}
+
+
+.tictactoe {
+
+    box-shadow:
+        0 0 25px
+        rgba(0,190,255,.12);
+}
+
+
+.tictactoe .game-icon {
+
+    box-shadow:
+        0 0 25px
+        rgba(0,190,255,.25);
+}
+
+
+/* =====================================================
+   PLAY BUTTON
+===================================================== */
+
+.play-button {
+
+    position: relative;
+
+    z-index: 3;
+
+    display: block;
+
+    width: 80%;
+
+    margin:
+        15px auto
+        18px;
+
+    padding: 11px;
+
+    border: 0;
+
+    border-radius: 30px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            90deg,
+            #111,
+            #222
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.2);
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+
+.play-button:active {
+
+    transform: scale(.94);
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.hub-footer {
+
+    text-align: center;
+
+    margin-top: 35px;
+
+    opacity: .65;
+}
+
+
+.footer-main {
+
+    font-size: 13px;
+
+    letter-spacing: 4px;
+}
+
+
+.footer-small {
+
+    margin-top: 10px;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+}
+
+
+/* =====================================================
+   LOADING SCREEN
+===================================================== */
+
+#loadingScreen {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 999998;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            #171733,
+            #020207 75%
+        );
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity .4s ease,
+        visibility .4s ease;
+}
+
+
+#loadingScreen.active {
+
+    opacity: 1;
+
+    visibility: visible;
+}
+
+
+.loader-box {
+
+    width:
+        min(88%, 380px);
+
+    text-align: center;
+}
+
+
+.loader-icon {
+
+    font-size: 55px;
+
+    margin-bottom: 15px;
+
+    animation:
+        loadingFloat 1.2s
+        ease-in-out
+        infinite;
+
+    filter:
+        drop-shadow(
+            0 0 15px
+            #00eaff
+        );
+}
+
+
+@keyframes loadingFloat {
+
+    0%,100% {
+        transform:
+            translateY(0)
+            rotate(0);
+    }
+
+    50% {
+        transform:
+            translateY(-10px)
+            rotate(5deg);
+    }
+}
+
+
+#loadingTitle {
+
+    font-size: 25px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+}
+
+
+#loadingPercent {
+
+    margin: 10px;
+
+    font-size: 14px;
+
+    opacity: .7;
+}
+
+
+.progress-container {
+
+    width: 100%;
+
+    height: 9px;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    background:
+        rgba(255,255,255,.12);
+}
+
+
+#progressBar {
+
+    width: 0%;
+
+    height: 100%;
+
+    border-radius: 20px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #00eaff,
+            #7b2cff,
+            #ff00cc,
+            #ffd700
+        );
+
+    background-size: 300%;
+
+    animation:
+        progressGlow 2s
+        linear infinite;
+
+    transition:
+        width .12s linear;
+}
+
+
+@keyframes progressGlow {
+
+    0% {
+        background-position: 0%;
+    }
+
+    100% {
+        background-position: 300%;
+    }
+}
+
+
+/* =====================================================
+   DESKTOP
+===================================================== */
+
+@media (min-width: 700px) {
+
+    #gameHub {
+
+        padding:
+            45px
+            30px
+            60px;
+    }
+
+    .games-grid {
+
+        grid-template-columns:
+            repeat(4, 1fr);
+
+        gap: 20px;
+    }
+
+    .game-card {
+
+        min-height: 280px;
+    }
+
+    .game-icon {
+
+        width: 105px;
+        height: 105px;
+
+        font-size: 60px;
+
+        margin-top: 30px;
+    }
+
+    .game-name {
+
+        font-size: 22px;
+    }
+
+}
+
+
+/* =====================================================
+   VERY SMALL PHONES
+===================================================== */
+
+@media (max-width: 360px) {
+
+    .games-grid {
+
+        gap: 9px;
+    }
+
+    .game-card {
+
+        min-height: 190px;
+
+        border-radius: 17px;
+    }
+
+    .game-icon {
+
+        width: 65px;
+        height: 65px;
+
+        font-size: 35px;
+    }
+
+    .game-name {
+
+        font-size: 16px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     AUDIO
+===================================================== -->
+
+<audio id="backgroundMusic"
+       loop
+       preload="auto">
+
+    <source
+        src="Faded .mp3"
+        type="audio/mpeg">
+
+</audio>
+
+
+<audio id="clickSound"
+       preload="auto">
+
+    <source
+        src="sounds/click.mp3"
+        type="audio/mpeg">
+
+</audio>
+
+
+<audio id="loadingSound"
+       preload="auto">
+
+    <source
+        src="Faded .mp3"
+        type="audio/mpeg">
+
+</audio>
+
+
+<audio id="startSound"
+       preload="auto">
+
+    <source
+        src="Faded .mp3"
+        type="audio/mpeg">
+
+</audio>
+
+
+<!-- =====================================================
+     SOUND BUTTON
+===================================================== -->
+
+<button id="soundButton"
+        onclick="toggleSound()">
+
+    🔇
+
+</button>
+
+
+<!-- =====================================================
+     INTRO VIDEO
+===================================================== -->
+
+<div id="introScreen">
+
+    <video id="introVideo"
+           autoplay
+           muted
+           playsinline
+           preload="auto">
+
+        <source
+            src="Deximal game.mp4"
+            type="video/mp4">
+
+    </video>
+
+
+    <div class="intro-dark"></div>
+
+
+    <!-- DEXIMAL LOGO -->
+
+    <div id="deximalLogo">
+
+        <div class="logo-crown">
+            👑
+        </div>
+
+        <div class="logo-main">
+            DEXIMAL
+        </div>
+
+        <div class="logo-gamehub">
+            GAMEHUB
+        </div>
+
+        <div class="logo-line"></div>
+
+        <div class="logo-tagline">
+            ONE WORLD • ENDLESS GAMES
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     LOADING SCREEN
+===================================================== -->
+
+<div id="loadingScreen">
+
+    <div class="loader-box">
+
+        <div id="loadingIcon"
+             class="loader-icon">
+            🎮
+        </div>
+
+        <h2 id="loadingTitle">
+            LOADING GAME...
+        </h2>
+
+        <p id="loadingPercent">
+            0%
+        </p>
+
+        <div class="progress-container">
+
+            <div id="progressBar"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MAIN GAME HUB
+===================================================== -->
+
+<main id="gameHub">
+
+
+    <div class="bg-glow glow-blue"></div>
+
+    <div class="bg-glow glow-purple"></div>
+
+    <div class="bg-glow glow-gold"></div>
+
+
+    <!-- HEADER -->
+
+    <header class="hub-header">
+
+        <div class="small-crown">
+            👑
+        </div>
+
+        <h1 class="hub-title">
+            DEXIMAL
+        </h1>
+
+        <div class="hub-subtitle">
+            GAMEHUB • ONE WORLD • ENDLESS GAMES
+        </div>
+
+    </header>
+
+
+    <!-- =================================================
+         GAMES
+    ================================================= -->
+
+    <section class="games-grid">
+
+
+        <!-- LUDO -->
+
+        <div class="game-card ludo"
+             onclick="openGame(
+                 'ludo.html',
+                 'LUDO',
+                 '🎲'
+             )">
+
+            <div class="game-icon">
+                🎲
+            </div>
+
+            <div class="game-name">
+                LUDO
+            </div>
+
+            <div class="game-description">
+                FUN • FAMILY • FOREVER
+            </div>
+
+            <button class="play-button"
+                    onclick="event.stopPropagation();
+                    openGame(
+                        'ludo.html',
+                        'LUDO',
+                        '🎲'
+                    )">
+
+                PLAY NOW
+
+            </button>
+
+        </div>
+
+
+        <!-- CHECKERS -->
+
+        <div class="game-card checkers"
+             onclick="openGame(
+                 'Checkers.html',
+                 'CHECKERS',
+                 '♟️'
+             )">
+
+            <div class="game-icon">
+                ♟️
+            </div>
+
+            <div class="game-name">
+                CHECKERS
+            </div>
+
+            <div class="game-description">
+                STRATEGY • FOCUS • VICTORY
+            </div>
+
+            <button class="play-button"
+                    onclick="event.stopPropagation();
+                    openGame(
+                        'checkers.html',
+                        'CHECKERS',
+                        '♟️'
+                    )">
+
+                PLAY NOW
+
+            </button>
+
+        </div>
+
+
+        <!-- MAHJONG -->
+
+        <div class="game-card mahjong"
+             onclick="openGame(
+                 'mahjong.html',
+                 'MAHJONG',
+                 '🀄'
+             )">
+
+            <div class="game-icon">
+                🀄
+            </div>
+
+            <div class="game-name">
+                MAHJONG
+            </div>
+
+            <div class="game-description">
+                WISDOM • PATIENCE • TRADITION
+            </div>
+
+            <button class="play-button"
+                    onclick="event.stopPropagation();
+                    openGame(
+                        'mahjong.html',
+                        'MAHJONG',
+                        '🀄'
+                    )">
+
+                PLAY NOW
+
+            </button>
+
+        </div>
+
+
+        <!-- TIC TAC TOE -->
+
+        <div class="game-card tictactoe"
+             onclick="openGame(
+                 'Tic tac toe.html',
+                 'TIC TAC TOE',
+                 '❌'
+             )">
+
+            <div class="game-icon">
+                ❌
+            </div>
+
+            <div class="game-name">
+                TIC TAC TOE
+            </div>
+
+            <div class="game-description">
+                SIMPLE RULES • ENDLESS FUN
+            </div>
+
+            <button class="play-button"
+                    onclick="event.stopPropagation();
+                    openGame(
+                        'tictactoe.html',
+                        'TIC TAC TOE',
+                        '❌'
+                    )">
+
+                PLAY NOW
+
+            </button>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer class="hub-footer">
+
+        <div class="footer-main">
+            PLAY • THINK • WIN
+        </div>
+
+        <div class="footer-small">
+            © 2026 DEXIMAL GAMEHUB
+        </div>
+
+    </footer>
+
+
+</main>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const introScreen =
+    document.getElementById("introScreen");
+
+const introVideo =
+    document.getElementById("introVideo");
+
+const deximalLogo =
+    document.getElementById("deximalLogo");
+
+const gameHub =
+    document.getElementById("gameHub");
+
+const loadingScreen =
+    document.getElementById("loadingScreen");
+
+const loadingTitle =
+    document.getElementById("loadingTitle");
+
+const loadingIcon =
+    document.getElementById("loadingIcon");
+
+const progressBar =
+    document.getElementById("progressBar");
+
+const loadingPercent =
+    document.getElementById("loadingPercent");
+
+const backgroundMusic =
+    document.getElementById("backgroundMusic");
+
+const clickSound =
+    document.getElementById("clickSound");
+
+const loadingSound =
+    document.getElementById("loadingSound");
+
+const startSound =
+    document.getElementById("startSound");
+
+const soundButton =
+    document.getElementById("soundButton");
+
+
+/* =====================================================
+   SOUND STATE
+===================================================== */
+
+let soundEnabled = false;
+
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+let introFinished = false;
+
+
+function finishIntro() {
+
+    if (introFinished) {
+        return;
+    }
+
+    introFinished = true;
+
+
+    /* Show DEXIMAL GAMEHUB */
+
+    deximalLogo.classList.add("show");
+
+
+    /*
+       Wait before entering the main hub.
+    */
+
+    setTimeout(() => {
+
+        introScreen.classList.add("hide");
+
+        gameHub.classList.add("visible");
+
+    }, 3000);
+
+}
+
+
+/* Video finished */
+
+introVideo.addEventListener(
+    "ended",
+    finishIntro
+);
+
+
+/*
+   If the video fails to load,
+   don't leave the user stuck
+   on the intro screen.
+*/
+
+introVideo.addEventListener(
+    "error",
+    () => {
+
+        setTimeout(
+            finishIntro,
+            1000
+        );
+
+    }
+);
+
+
+/*
+   Backup:
+   If the video takes too long,
+   still allow the intro to continue.
+*/
+
+setTimeout(() => {
+
+    if (!introFinished) {
+
+        finishIntro();
+
+    }
+
+}, 15000);
+
+
+/* =====================================================
+   SOUND
+===================================================== */
+
+function enableSound() {
+
+    if (soundEnabled) {
+        return;
+    }
+
+
+    soundEnabled = true;
+
+
+    backgroundMusic.volume = 0.28;
+
+
+    backgroundMusic.play()
+        .then(() => {
+
+            soundButton.textContent =
+                "🔊";
+
+        })
+        .catch(() => {
+
+            soundEnabled = false;
+
+        });
+
+}
+
+
+/* =====================================================
+   TOGGLE SOUND
+===================================================== */
+
+function toggleSound() {
+
+    if (!soundEnabled) {
+
+        soundEnabled = true;
+
+        backgroundMusic.volume = 0.28;
+
+        backgroundMusic.play()
+            .then(() => {
+
+                soundButton.textContent =
+                    "🔊";
+
+            })
+            .catch(() => {
+
+                soundEnabled = false;
+
+            });
+
+    }
+
+    else {
+
+        backgroundMusic.pause();
+
+        soundEnabled = false;
+
+        soundButton.textContent =
+            "🔇";
+
+    }
+
+}
+
+
+/* =====================================================
+   BUTTON SOUND
+===================================================== */
+
+function playClick() {
+
+    if (!soundEnabled) {
+        return;
+    }
+
+    clickSound.currentTime = 0;
+
+    clickSound.volume = 0.65;
+
+    clickSound.play()
+        .catch(() => {});
+
+}
+
+
+/* =====================================================
+   ENABLE SOUND AFTER FIRST USER TOUCH
+===================================================== */
+
+document.addEventListener(
+    "pointerdown",
+    () => {
+
+        /*
+           We don't automatically force
+           music on.
+
+           The first interaction enables
+           the audio system so mobile
+           browsers allow sound.
+        */
+
+    },
+    {
+        once: true
+    }
+);
+
+
+/* =====================================================
+   OPEN GAME
+===================================================== */
+
+function openGame(
+    gamePage,
+    gameName,
+    gameIcon
+) {
+
+
+    /* Prevent accidental multiple taps */
+
+    if (
+        loadingScreen.classList.contains(
+            "active"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    /* Enable audio after user interaction */
+
+    if (!soundEnabled) {
+
+        soundEnabled = true;
+
+        backgroundMusic.volume = 0.28;
+
+        backgroundMusic.play()
+            .catch(() => {});
+
+        soundButton.textContent =
+            "🔊";
+
+    }
+
+
+    /* Click sound */
+
+    playClick();
+
+
+    /* Configure loading screen */
+
+    loadingIcon.textContent =
+        gameIcon;
+
+    loadingTitle.textContent =
+        "LOADING " +
+        gameName +
+        "...";
+
+
+    progressBar.style.width =
+        "0%";
+
+    loadingPercent.textContent =
+        "0%";
+
+
+    /* Show loading screen */
+
+    loadingScreen.classList.add(
+        "active"
+    );
+
+
+    /* Loading sound */
+
+    if (soundEnabled) {
+
+        loadingSound.currentTime =
+            0;
+
+        loadingSound.volume =
+            0.5;
+
+        loadingSound.play()
+            .catch(() => {});
+
+    }
+
+
+    /* =================================================
+       LOADING ANIMATION
+    ================================================= */
+
+    let progress = 0;
+
+
+    const loadingInterval =
+        setInterval(() => {
+
+
+            /*
+               Random realistic
+               loading speed
+            */
+
+            let increase =
+                Math.floor(
+                    Math.random() * 8
+                ) + 3;
+
+
+            progress += increase;
+
+
+            if (progress >= 100) {
+
+                progress = 100;
+
+            }
+
+
+            progressBar.style.width =
+                progress + "%";
+
+
+            loadingPercent.textContent =
+                progress + "%";
+
+
+            /* Finished */
+
+            if (progress >= 100) {
+
+                clearInterval(
+                    loadingInterval
+                );
+
+
+                /* Start sound */
+
+                if (soundEnabled) {
+
+                    startSound.currentTime =
+                        0;
+
+                    startSound.volume =
+                        0.55;
+
+                    startSound.play()
+                        .catch(() => {});
+
+                }
+
+
+                /*
+                   Small pause so the
+                   user sees 100%.
+                */
+
+                setTimeout(() => {
+
+                    window.location.href =
+                        gamePage;
+
+                }, 450);
+
+            }
+
+
+        }, 130);
+
+}
+
+
+/* =====================================================
+   PREVENT DOUBLE CLICK / TOUCH
+===================================================== */
+
+document.addEventListener(
+    "touchstart",
+    function() {
+
+        /*
+           Mobile browser touch handling.
+        */
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+/* =====================================================
+   PRELOAD GAME FILES
+===================================================== */
+
+const gamePages = [
+
+    "ludo.html",
+    "checkers.html",
+    "mahjong.html",
+    "tictactoe.html"
+
+];
+
+
+gamePages.forEach(page => {
+
+    const link =
+        document.createElement("link");
+
+    link.rel = "prefetch";
+
+    link.href = page;
+
+    document.head.appendChild(link);
+
+});
+
+
+</script>
+
+</body>
+</html>
